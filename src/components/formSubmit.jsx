@@ -25,16 +25,15 @@ export default function FormSubmit({ onSubmit }){
         <label>Firstname
         <input value={formData.firstName} name="first" required type="text" onChange={(e) => setData({...formData, firstName: e.target.value})}/>
         </label>
-      
-      
-        <label>Lastname</label>
+
+        <label>Lastname
         <input value={formData.lastName} name="last" required type="text" onChange={(e) => setData({...formData, lastName: e.target.value})}/>
-      
+        </label>
+
     <button type='submit'>Submit</button>
     </form>
         
         </>
-
 
     )
 }

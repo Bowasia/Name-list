@@ -2,6 +2,9 @@ import { useState } from 'react'
 import './App.css'
 import FormSubmit from './components/FormSubmit'
 import NameList from './components/nameList'
+import NameItem from './components/NameItem'
+
+
 
 function App() {
 
@@ -45,7 +48,7 @@ function App() {
 
 {/* Name list */}
 
-    {/* <table>
+    <table>
       <thead>
       <tr>
         <th>Firstname</th>
@@ -53,20 +56,15 @@ function App() {
         <th>ID</th>
       </tr>
       </thead>
-      <tbody> */}
+      <tbody>
 
-      {/* <tr>
-        <td>fName example</td>
-        <td>lName example</td>
-        <td>ID example</td>
-      </tr> */}
       {/* {renderAll()} */}
-      {/* </tbody>
 
-    </table> */}
+    {/* <NameList list={list}/> */}
+    {/* <NameItem firstNam="dfdf" lastName="dfd" ID={3} onDelete={handleDelete}/> */}
+      </tbody>
 
-    <NameList list={list}/>
-
+    </table>
     
     </>
   )
