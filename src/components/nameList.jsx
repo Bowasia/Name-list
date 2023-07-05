@@ -1,14 +1,15 @@
 import NameItem from "./NameItem"
-export default function NameList(list) {
-    if(list == undefined){
-        return ("NON")
-    }
-    else{
-        return ( list.map(({firstName: FN, lastName: LN, ID}) => {
-                <NameItem firstName={FN} lastName={LN} ID={ID} onDelete={handleDelete(ID)}/>
-            }))
-    }
+export default function NameList({list, handleDelete}) {
+    console.log(list)
+    console.log(typeof list)
+    const renderName = list.map((data) => {
+        return (
+            <NameItem firstName={data.firstName} lastName={data.lastName} ID={data.ID} onDelete={handleDelete} key={data.ID}/>
+    )})
+
+    return (
+        <>
+            {renderName}
+        </>
+    )
 }
-
-
-// TO BE CLARIFIED

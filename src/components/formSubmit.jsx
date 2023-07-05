@@ -9,7 +9,9 @@ export default function FormSubmit({ onSubmit }){
     const handleSubmit = (e) =>  {
     e.preventDefault(); // prevent a browser reload/refresh
     setData({...formData, ID: formData.ID})
+
     onSubmit(formData) // send data back
+    
     console.log(`formData = ${formData}`)
     console.log(`formData.firstName = ${formData.firstName}`)
     setData({
@@ -33,7 +35,6 @@ export default function FormSubmit({ onSubmit }){
     <button type='submit'>Submit</button>
     </form>
         
-        </>
-
+    </>
     )
 }

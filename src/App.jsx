@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 import FormSubmit from './components/FormSubmit'
-import NameList from './components/nameList'
 import NameItem from './components/NameItem'
+import NameList from './components/nameList'
 
 
 
@@ -13,12 +13,13 @@ function App() {
   const handleAddName = (data) => {
     console.log(data)
     setList([...list, data])
-    console.log(`list: ${list}`)
+    console.log(`list: ${list}`,"this is list handleAddname")
   }
 
   const handleDelete = (idDel) => {
-    const newList = list.filter((item) => item.ID !== id) 
+    const newList = list.filter((item) => item.ID !== idDel) 
     setList(newList)
+    console.log(`idDel = ${idDel}`)
   }
 
   // const renderAll = () => {
@@ -60,8 +61,8 @@ function App() {
 
       {/* {renderAll()} */}
 
-    {/* <NameList list={list}/> */}
-    {/* <NameItem firstNam="dfdf" lastName="dfd" ID={3} onDelete={handleDelete}/> */}
+    <NameList list={list} handleDelete={handleDelete}/>
+    {/* <NameItem firstName="dfdfdd" lastName="dfd" ID={3} onDelete={handleDelete}/> */}
       </tbody>
 
     </table>
