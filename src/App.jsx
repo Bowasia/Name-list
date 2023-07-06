@@ -1,26 +1,42 @@
 import { useState } from 'react'
 import './App.css'
 import FormSubmit from './components/FormSubmit'
-import NameItem from './components/NameItem'
 import NameList from './components/nameList'
+import SearchBar from './components/SearchBar'
+import { DSBox, DSTextStyle } from 'ttb-design-system-webview'
 
 
 
 function App() {
 
   const [list, setList] = useState([])
+  const [filterList, setFilter] = useState([])
 
   const handleAddName = (data) => {
     console.log(data)
     setList([...list, data])
-    console.log(`list: ${list}`,"this is list handleAddname")
+    setFilter([...filterList, data])
+    console.log(`list: ${list}`, "this is list handleAddname")
   }
 
   const handleDelete = (idDel) => {
-    const newList = list.filter((item) => item.ID !== idDel) 
+    const newList = list.filter((item) => item.ID !== idDel)
     setList(newList)
     console.log(`idDel = ${idDel}`)
+    setFilter(newList)
+    setList(newList)
   }
+
+  const handleSearch = (term) => {
+    const filterList = list.filter((item) => {
+      // console.log(`item in handleSearch ${item.firstName}`)
+      return (item.firstName.toLowerCase().includes(term.toLowerCase()) || item.lastName.toLowerCase().includes(term.toLowerCase()))
+    })
+    console.log(`App.jsx term value = ${term}`)
+    console.log(filterList)
+    setFilter(filterList)
+  }
+
 
   // const renderAll = () => {
   //   const onDelete = (id) => {
@@ -38,35 +54,31 @@ function App() {
   //           <button onClick={() => onDelete(ID)}>Delete</button>
   //         </td>
   //       </tr>
-        
+
   //     )
   //   }) 
   // }
 
   return (
     <>
-    <FormSubmit onSubmit={handleAddName}/>
+      <DSBox
+        gap={32}
+        px={16}
+        py={8}
+      >
+        <DSTextStyle variant="specialH1">
+          Registeration Form
+        </DSTextStyle>
 
-{/* Name list */}
+        <FormSubmit onSubmit={handleAddName} />
+        <SearchBar onChange={handleSearch} />
+        <NameList list={filterList} handleDelete={handleDelete} />
+        {/* <NameItem firstName="dfdfdd" lastName="dfd" ID={3} onDelete={handleDelete}/> */}
+        {/* </tbody>
 
-    <table>
-      <thead>
-      <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>ID</th>
-      </tr>
-      </thead>
-      <tbody>
+    </table> */}
+      </DSBox>
 
-      {/* {renderAll()} */}
-
-    <NameList list={list} handleDelete={handleDelete}/>
-    {/* <NameItem firstName="dfdfdd" lastName="dfd" ID={3} onDelete={handleDelete}/> */}
-      </tbody>
-
-    </table>
-    
     </>
   )
 }
