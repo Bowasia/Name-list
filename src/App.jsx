@@ -63,8 +63,8 @@ function App() {
     <>
       <DSBox
         gap={32}
-        px={16}
-        py={8}
+        px={8}
+        py={4}
       >
         <DSTextStyle variant="specialH1">
           Registeration Form
@@ -72,12 +72,12 @@ function App() {
 
         <FormSubmit onSubmit={handleAddName} />
         <SearchBar onChange={handleSearch} />
+        </DSBox>
         <NameList list={filterList} handleDelete={handleDelete} />
         {/* <NameItem firstName="dfdfdd" lastName="dfd" ID={3} onDelete={handleDelete}/> */}
         {/* </tbody>
 
     </table> */}
-      </DSBox>
 
     </>
   )

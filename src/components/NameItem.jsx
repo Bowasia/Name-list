@@ -1,4 +1,4 @@
-import { DSListAction } from "ttb-design-system-webview"
+import { DSListAction, DSClickableIcon } from "ttb-design-system-webview"
 
 export default function NameItem({ ID, firstName, lastName, onDelete }) {
   const handleClick = () => {
@@ -10,8 +10,8 @@ export default function NameItem({ ID, firstName, lastName, onDelete }) {
   return (
     <DSListAction
       avatar
-      iconRight="close"
-      onClick={handleClick}
+      hover={false}
+      iconRight={<DSClickableIcon icon="close" onClick={handleClick}/>}
       text={"ID: " + ID + " Name: " + firstName + " " + lastName}
     />
     // <tr key={ID}>

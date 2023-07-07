@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DSTextField, DSButton, DSFormGroup } from 'ttb-design-system-webview'
+
 export default function FormSubmit({ onSubmit }) {
 	const [formData, setData] = useState({
 		firstName: "",
@@ -7,51 +8,52 @@ export default function FormSubmit({ onSubmit }) {
 		ID: 1
 	})
 
+	const [error, setError] = useState({
+		errorFirst: false,
+		errorLast: false
+	})
+
+
 	const handleSubmit = (e) => {
 		e.preventDefault(); // prevent a browser reload/refresh
-		setData({ ...formData, ID: formData.ID })
 
-		onSubmit(formData) // send data back
+		if (formData.firstName && formData.lastName){
+			setData({ ...formData, ID: formData.ID })
+			onSubmit(formData) // send data back
+			console.log(`formData = ${formData}`)
+			console.log(`formData.firstName = ${formData.firstName}`)
+			setData({
+				firstName: "",
+				lastName: "",
+				ID: formData.ID + 1
+			})
+			setError({errorFirst: false, errorLast: false})
+		} 
+		else {
+			setError({errorFirst: formData.firstName ? false : true, errorLast: formData.lastName ? false : true})
+		}
 
-		console.log(`formData = ${formData}`)
-		console.log(`formData.firstName = ${formData.firstName}`)
-		setData({
-			firstName: "",
-			lastName: "",
-			ID: formData.ID + 1
-		})
+		console.log(`errorFirst ${error.errorFirst}`)
+		console.log(`errorLast ${error.errorLast}`)
 	}
+	
 	return (
 		<>
-			{/* <form onSubmit={handleSubmit}>
-      
-        <label>Firstname
-        <input value={formData.firstName} name="first" required type="text" onChange={(e) => setData({...formData, firstName: e.target.value})}/>
-        </label>
-
-        <label>Lastname
-        <input value={formData.lastName} name="last" required type="text" onChange={(e) => setData({...formData, lastName: e.target.value})}/>
-        </label>
-
-    <button type='submit'>Submit</button>
-    </form> */}
 			<DSFormGroup>
 				<DSTextField
 					value={formData.firstName}
-					required
+					error={error.errorFirst}
+					errorMessage="Enter your first name"
 					half
-					helpingText="Please enter your firstname"
 					onChange={(e) => setData({ ...formData, firstName: e.target.value })}
 					label="Firstname"
-
-
 					tabIndex={1}
 				/>
 				<DSTextField
 					half
-					required
+					error={error.errorLast}
+					errorMessage="Enter your last name"
 					value={formData.lastName}
-					helpingText="Please enter your lastname"
 					onChange={(e) => setData({ ...formData, lastName: e.target.value })}
 					label="Lastname"
 					tabIndex={2}
